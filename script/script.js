@@ -1,3 +1,5 @@
+'use strict';
+name = 'zach';
 var theDrinks = {
     strong: "Hard",
     sweet: "Sweetie",
@@ -16,13 +18,15 @@ var Bartender = function() {
         var ingredients = [];
 
 
-        var randomIng = function() {
-            return Math.floor(Math.random() * 4) + 1;
+        var randomIng = function(length) {
+            return Math.floor(Math.random() * length);
         }
 
         for (var property in preferences) {
             nameOfDrink += theDrinks[property] + " ";
-            ingredients.push(pantry[property][randomIng()].ingredient);
+            var randomNumber = randomIng(pantry[property].length);
+            console.log(randomNumber, pantry[property], pantry[property][randomNumber], 'random');
+            ingredients.push(pantry[property][randomNumber].ingredient);
 
         }
 
@@ -33,9 +37,15 @@ var Bartender = function() {
 
 };
 
-function newDrink(){
-    $('#output').html("");
-    $('#question').html(questionArray[currentQuestionIndex].questionText);
+function newDrink(questionArray) {
+    $('#output').empty();
+    $('#question').html(questionArray[0].questionText);
+    $("input:radio").attr("checked", false);
+    // show next button
+    console.log("We are here");
+    $('#next').show();
+    $('#new_drink').hide();
+    // or $(this).hide();
 
 }
 
@@ -63,9 +73,6 @@ var ThePantry = function(strong, salty, sweet, bitter, fruity) {
     this.bitter = bitter;
     this.fruity = fruity;
 }
-
-
-
 
 $(document).ready(function() {
     $('#new_drink').hide();
@@ -95,12 +102,18 @@ $(document).ready(function() {
 
     $('#response').on('submit', function(e) {
         e.preventDefault();
+        console.log(currentQuestionIndex, "current question position");
         if ($('input:checked').val() == "Yay") {
             preferences[questionArray[currentQuestionIndex].flavor] = true;
         }
+
         if (currentQuestionIndex >= questionArray.length - 1) {
             bar.createDrink(preferences, pantry)
-            //$('new_drink').show();
+            $('#next').hide();
+            $('#new_drink').show();
+            // reset values to defaults
+            currentQuestionIndex = 0;
+            preferences = {};
 
         } else {
             console.log(preferences);
@@ -110,6 +123,9 @@ $(document).ready(function() {
         }
     });
 
+    $('#new_drink').on('click', function(e) {
+        newDrink(questionArray);
+    });
 
 });
 
@@ -141,10 +157,10 @@ $(document).ready(function() {
 
 
 // newDrink();
-//     // $('new_drink').on('submit', function(e) {
-//     //     e.preventDefault();
-//     //     $('#output').html("");
-//     //     questionArray[0];
-//     //     var nameOfDrink = "";
-//     //     var ingredients = [];
-//     // });
+// $('new_drink').on('submit', function(e) {
+//     e.preventDefault();
+//     $('#output').html("");
+//     questionArray[0];
+//     var nameOfDrink = "";
+//     var ingredients = [];
+// });
