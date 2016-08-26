@@ -1,0 +1,36 @@
+{
+    "name": "pirate-bartender",
+    "version": "1.0.0",
+    "description": "",
+    "main": "script/script.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "build:js": "npm run clean:js && webpack",
+        "watch:js": "npm run build:js && webpack --watch",
+        "clean:js": "rm -f build/script.js build/script.js.map"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/zoverlvx/pirateBartender.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "babel-core": "^6.13.2",
+        "babel-loader": "^6.2.5",
+        "babel-preset-es2015": "^6.13.2",
+        "chokidar-cli": "^1.2.0",
+        "less": "^2.7.1",
+        "less-plugin-clean-css": "^1.5.1",
+        "uglify-js": "^2.7.3"
+    },
+    "dependencies": {
+        "chokidar-cli": "^1.2.0",
+        "jquery": "^3.1.0",
+        "less": "^2.7.1"
+    },
+    "bugs": {
+        "url": "https://github.com/zoverlvx/pirateBartender/issues"
+    },
+    "homepage": "https://github.com/zoverlvx/pirateBartender#readme"
+}
