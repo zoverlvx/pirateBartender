@@ -1,0 +1,15 @@
+body {
+	background-image: url('https://staticdelivery.nexusmods.com/mods/110/images/20911-3-1342941606.jpg');
+}
+
+h1, h2, p {
+	color: white;
+}
+
+input[type=radio],
+input.radio {
+  float: left;
+  clear: none;
+  margin: 2px 0 0 2px;
+  display: inline;
+}
